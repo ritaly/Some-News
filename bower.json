@@ -1,0 +1,17 @@
+{
+  "name": "Some-News",
+  "description": "",
+  "main": "",
+  "authors": [
+    "ritaly <malgorzata.lyczywek@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ritaly/Some-News",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
