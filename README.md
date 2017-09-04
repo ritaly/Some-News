@@ -1,2 +1,5 @@
-# Some-News
+#Some News  
+  
 Rails + AngularJS
+
+
