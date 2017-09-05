@@ -1,0 +1,22 @@
+{
+  "name": "Some-News",
+  "description": "",
+  "main": "",
+  "authors": [
+    "ritaly <malgorzata.lyczywek@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-ui-router": "^1.0.6",
+    "bootstrap": "^3.3.7"
+  }
+}
