@@ -1,13 +1,14 @@
 angular.module('flapperNews')
- .factory ('posts', [function(){
+ .factory ('posts', ['$http', function($http){
             var o = {
-            posts: [
-              {title: 'post 1', upvotes: 5, comments: []},
-              {title: 'post 2', upvotes: 2, comments: []},
-              {title: 'post 3', upvotes: 15, comments: [{author: 'Jon', body: 'Winter is comming!', upvotes: 3}]},
-              {title: 'post 4', upvotes: 9, comments: []},
-              {title: 'post 5', upvotes: 4, comments: []}
-              ]
+            posts: []
              };
-            return o;
-        }])
+    o.getAll = function() {
+      return $http.get('/posts.json').then(function onSuccess(response) {
+        angular.copy(response.data, o.posts);
+      }, function onError(response) {
+        window.alert('Error: ' + response.status + " - " +response.statusText);
+      });
+    };
+    return o;
+  }])

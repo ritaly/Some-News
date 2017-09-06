@@ -6,6 +6,7 @@
         $scope.addPost = function(){
           if(!$scope.title || $scope.title === '') { return; }
           $scope.posts.push({
+            id: $scope.posts.length,
             title: $scope.title,
             link: $scope.link,
             upvotes: 0,
