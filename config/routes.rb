@@ -11,4 +11,5 @@ Rails.application.routes.draw do
       put '/upvote' => 'posts#upvote'
     end
   end
+  default_url_options :host => "localhost:3000/#/"
 end

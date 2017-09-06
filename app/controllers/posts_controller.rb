@@ -1,10 +1,25 @@
 class PostsController < ApplicationController
   def index
-    respond_with Post.all
+    #dopilnuj ze baza jest dobrze skonfigurowana, nie jest bo nie ma id!
+    #rails consol utwórz posty - done
+    # render json - i by sie wyswietlyt
+
+    @posts = Post.all
+      # dodasz w linii ponizej uzycie serializera (najpierw go trzeba utworzyc),
+      # ktory ograniczy wyswietlanie atrybutow posta
+
+    render json: @posts
   end
 
+
   def create
-    respond_with Post.create(post_params)
+    # zwracanie bledu jezeli post nie jest poprawny
+    post = Post.create(post_params)
+    if post.valid?
+      render json: post
+    else
+      render json: post.errors.full_messages
+    end
   end
 
   def show
@@ -16,6 +31,10 @@ class PostsController < ApplicationController
     post.increment!(:upvotes)
 
     respond_with post
+  end
+
+  def default_serializer_options
+    { root: false }
   end
 
   private
