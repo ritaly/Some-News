@@ -15,6 +15,6 @@
             
         };
         $scope.incrementUpvotes = function(post) {
-          post.upvotes += 1;
+          posts.upvote(post);
         };
     }]);

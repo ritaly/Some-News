@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     #dopilnuj ze baza jest dobrze skonfigurowana, nie jest bo nie ma id!
     #rails consol utwórz posty - done
@@ -29,8 +31,7 @@ class PostsController < ApplicationController
   def upvote
     post = Post.find(params[:id])
     post.increment!(:upvotes)
-
-    respond_with post
+    render json: post
   end
 
   def default_serializer_options
@@ -40,6 +41,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:link, :title)
+    params.require(:post).permit(:link, :title, :id)
   end
 end
