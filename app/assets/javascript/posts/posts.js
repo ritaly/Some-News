@@ -36,8 +36,17 @@ angular.module('flapperNews')
     };
     o.get = function(id) {
       return $http.get('/posts/' + id ).then(function onSuccess(response){
-        
         return response.data;
+      }, function onError(response) {
+        window.alert('Error: ' + response.status + " - " + response.statusText);
+      });
+    };
+    o.addComment = function(id, comment) {
+     
+      return $http.post('/posts/' + id + '/comments', comment).then(function onSuccess(response){
+        return response.data;
+      }, function onError(response) {
+        window.alert('Error: ' + response.status + " - " + response.statusText);
       });
     };
     return o;

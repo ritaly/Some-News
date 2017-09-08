@@ -1,16 +1,22 @@
 class CommentsController < ApplicationController
   def create
+
     post = Post.find(params[:post_id])
-    comment = post.comments.create(comment_params)
-    respond_with post, comment
+    comment = post.comments.create(params[:comment].permit!)
+    #params.required - strong parametes!
+    if comment.valid?
+      render json: post # comment
+    else
+      render json: post.errors.full_messages
+    end
   end
 
   def upvote
     post = Post.find(params[:post_id])
-    comment = post.comments.find(params[:id])
-    comment.increment!(:upvotes)
+    #comment = post.comments.find(params[:id])
+    #comment.increment!(:upvotes)
 
-    respond_with post, comment
+    #respond_with post, comment
   end
 
   private

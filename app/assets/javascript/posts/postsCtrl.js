@@ -5,16 +5,21 @@
         'post',
         function($scope, posts, post){
             $scope.post = post;
+
             $scope.addComment = function(){
-            if($scope.body === '') { return; }
-            $scope.post.comments.push({
+            if($scope.body === '' || $scope.body == null) { return; }
+            posts.addComment(post.id, {
               body: $scope.body,
-              author: 'user',
-              upvotes: 0
+              upvotes: 0,
+              username: 'user'
+            }).then(function onSuccess(comment){
+              $scope.post.comments = comment.post.comments;
+              //$scope.post.comments.push() //lastone
+
             });
-            $scope.body = '';
           };
           $scope.incrementUpvotes = function(comment) {
             comment.upvotes += 1;
           };
         }])
+ //przyciski do sortowania

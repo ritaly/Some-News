@@ -14,35 +14,44 @@
     </span>
   </span>
   <span>
-     <a href="#/posts/{{post.id}}">Comments site</a>
-  <button class="btn btn-xs btn-info" ng-click="showComments = ! showComments" ng-show="{{post.comments.length}}"> 
+    <a href="#/posts/{{post.id}}">Comments site</a>
+    <button class="btn btn-xs btn-info" ng-click="showComments = ! showComments" ng-show="{{post.comments.length}}">
     See comments
-  </button>
-  <div class="" ng-show="showComments">
-    <div ng-repeat="comment in post.comments | orderBy:'-upvotes'" style="margin-left:1em;">
-      <span class="glyphicon glyphicon-thumbs-up"
-      ng-click="incrementUpvotes(comment)"></span>
-      {{comment.upvotes}} - by {{comment.author}}
-      <span style="margin-left:10px;">
-        {{comment.body}}
-      </span>
-    </div>  <!-- to tu maja sie wyswietlac komentarze wysuwac sie -->
-  </div>
-</div>
-<form ng-submit="addPost()"
-  style="margin-top:30px;">
-  <h3>Add a new post</h3>
-  <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="Title"
-    ng-model="title"></input>
-  </div>
-  <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="Link"
-    ng-model="link"></input>
-  </div>
-  <button type="submit" class="btn btn-primary">Post</button>
-</form>
+    </button>
+    <div class="" ng-show="showComments">
+      <div ng-repeat="comment in post.comments | orderBy:'-upvotes'" style="margin-left:1em;">
+        <span class="glyphicon glyphicon-thumbs-up"
+        ng-click="incrementUpvotes(comment)"></span>
+        {{comment.upvotes}} - by
+        <span ng-show="{{comment.username.length}}">
+          {{comment.username}}
+        </span>
+        <span ng-hide="{{comment.username.length}}">
+          Anonimous
+        </span>
+        <span style="font-size:20px; margin-left:10px;">
+          {{comment.body}}
+        </span>
+        <span style="margin-left:10px;">
+          {{comment.body}}
+        </span>
+        </div>  <!-- to tu maja sie wyswietlac komentarze wysuwac sie -->
+      </div>
+    </div>
+    <form ng-submit="addPost()"
+      style="margin-top:30px;">
+      <h3>Add a new post</h3>
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Title"
+        ng-model="title"></input>
+      </div>
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Link"
+        ng-model="link"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
