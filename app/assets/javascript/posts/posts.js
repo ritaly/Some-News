@@ -26,14 +26,18 @@ angular.module('flapperNews')
                 o.posts[i].upvotes+=1;
             }
           }*/
-          i = o.posts.findIndex(i => i.id === response.data.id); //ES2015  
-          o.posts[i].upvotes +=1;
-
-          //underscore
-
+           i = o.posts.findIndex(i => i.id === response.data.id); //ES2015  
+            o.posts[i].upvotes +=1;
+      
           angular.copy(response.data, o.posts.filter(x => x.id === response.data.id))
         }, function onError(response) {
         window.alert('Error: ' + response.status + " - " +response.statusText);
+      });
+    };
+    o.get = function(id) {
+      return $http.get('/posts/' + id ).then(function onSuccess(response){
+        
+        return response.data;
       });
     };
     return o;

@@ -15,7 +15,8 @@
   </span>
   <span>
      <a href="#/posts/{{post.id}}">Comments site</a>
-  <button class="btn btn-xs btn-info" ng-click="showComments = ! showComments" ng-show="{{post.comments.length}}"> See comments </a>
+  <button class="btn btn-xs btn-info" ng-click="showComments = ! showComments" ng-show="{{post.comments.length}}"> 
+    See comments
   </button>
   <div class="" ng-show="showComments">
     <div ng-repeat="comment in post.comments | orderBy:'-upvotes'" style="margin-left:1em;">
@@ -27,7 +28,6 @@
       </span>
     </div>  <!-- to tu maja sie wyswietlac komentarze wysuwac sie -->
   </div>
- 
 </div>
 <form ng-submit="addPost()"
   style="margin-top:30px;">

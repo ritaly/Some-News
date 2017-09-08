@@ -13,7 +13,6 @@ class PostsController < ApplicationController
     render json: @posts
   end
 
-
   def create
     # zwracanie bledu jezeli post nie jest poprawny
     post = Post.create(post_params)
@@ -25,7 +24,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    respond_with Post.find(params[:id])
+    post = Post.find(params[:id])
+    #comment = post.comments
+    render json: post
   end
 
   def upvote
