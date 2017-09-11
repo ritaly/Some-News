@@ -13,8 +13,8 @@
               upvotes: 0,
               username: 'user'
             }).then(function onSuccess(comment){
-              $scope.post.comments = comment.post.comments;
-              //$scope.post.comments.push() //lastone
+              //$scope.post.comments = comment.post.comments;
+              $scope.post.comments.push(comment) //lastone
 
             });
           };

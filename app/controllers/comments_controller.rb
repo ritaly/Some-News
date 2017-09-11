@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     comment = post.comments.create(params[:comment].permit!)
     #params.required - strong parametes!
     if comment.valid?
-      render json: post # comment
+      render json: comment
     else
       render json: post.errors.full_messages
     end
@@ -13,8 +13,8 @@ class CommentsController < ApplicationController
 
   def upvote
     post = Post.find(params[:post_id])
-    #comment = post.comments.find(params[:id])
-    #comment.increment!(:upvotes)
+    comment = post.comments.find(params[:id])
+    comment.increment!(:upvotes)
 
     #respond_with post, comment
   end
