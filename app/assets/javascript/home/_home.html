@@ -5,9 +5,8 @@
 <nav class="navbar">
 Sort by: 
 <span class="btn-group" >
-  <button type="button" class="btn btn-primary" ng-click="btn = 'title' ">title</button>
-  <button type="button" class="btn btn-primary" ng-click="btn = 'upvotes'">upvotes</button>
-  <button type="button" class="btn btn-primary" ng-click="btn = 'username'">user name</button>
+  <button type="button" class="btn btn-primary" ng-click="btn = sortBy('title') ">title</button>
+  <button type="button" class="btn btn-primary" ng-click="btn = 'upvotes'; reverse=!reverse">upvotes</button>
 </span>
 <div class="input-group col-md-4 pull-right">
   <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
@@ -18,7 +17,7 @@ Sort by:
 </nav>
 
 
-<div ng-repeat="post in posts | orderBy: btn | filter:searchText"">
+<div ng-repeat="post in posts | orderBy: btn:reverse | filter:searchText"">
   <span class="glyphicon glyphicon-thumbs-up"
   ng-click="incrementUpvotes(post)"></span>
   {{post.upvotes}}

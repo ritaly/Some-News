@@ -3,32 +3,18 @@
     '$scope','posts',
     function($scope, posts){
         $scope.posts = posts.posts;
-/*
-        $scope.btnSwitch = function (btnIndex) {
-          //Sort by title
-          if (btnIndex == 1){
-            //alert(tabIndex);
-            $scope.sortPosts = function(post) {
-           return post.title;
-            };
-          }   
-          //Sort by upvotes 
-          if (btnIndex == 2){
-            $scope.sortPosts = function(post) {
-              return post.upvotes;
-            };
-          }
-          //Sort by username
-          if (btnIndex == 3){
-            $scope.sortPosts = function(post) {
-               return post.username;
-            };
-          }
-        };
-        dopisac sortowanie
-*/ 
 
-        // tu wyciagnac sortPost
+        $scope.currentBtn = '';
+        $scope.sortBy = function (btn) {
+          if ($scope.currentBtn == btn) {
+            $scope.currentBtn = '-'+ btn;
+          } else {
+            $scope.currentBtn = btn;
+          }
+          //alert($scope.currentBtn);
+          return $scope.currentBtn;
+           };
+          //dopisac sortowanie
 
         $scope.addPost = function(){
           
