@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  def create
 
+  def create
     post = Post.find(params[:post_id])
     comment = post.comments.create(params[:comment].permit!)
     #params.required - strong parametes!
@@ -15,8 +15,14 @@ class CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     comment = post.comments.find(params[:id])
     comment.increment!(:upvotes)
+    render json: comment
+  end
 
-    #respond_with post, comment
+  def destroy
+    post = Post.find(params[:post_id])
+    comment = post.comments.find(params[:id])
+    comment.destroy
+    render json: post
   end
 
   private

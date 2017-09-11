@@ -1,9 +1,9 @@
  angular.module('flapperNews')
  .controller('PostsCtrl', [
-        '$scope',
+        '$scope', '$window',
         'posts',
         'post',
-        function($scope, posts, post){
+        function($scope, $window, posts, post){
             $scope.post = post;
 
             $scope.addComment = function(){
@@ -19,7 +19,20 @@
             });
           };
           $scope.incrementUpvotes = function(comment) {
-            comment.upvotes += 1;
+            posts.upvoteComment(post, comment);
+          };
+
+          $scope.deleteComment = function(comment){  
+            var confirmDeleteComment = $window.confirm('Are you absolutely sure you want to delete this element?');
+
+            if (confirmDeleteComment){
+              posts.deleteComment(post, comment).then(function onSuccess(){
+              //to samo co w post.js , gdzie lepiej?
+              pos = $scope.post.comments.findIndex(i => i.id === comment.id );
+              $scope.post.comments.splice(pos, 1);
+            });
+            } else { return; }
+            
           };
         }])
  //przyciski do sortowania

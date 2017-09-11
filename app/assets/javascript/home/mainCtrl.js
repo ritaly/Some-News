@@ -15,6 +15,7 @@
           return $scope.currentBtn;
            };
           //dopisac sortowanie
+          //search tylko dla tytulow
 
         $scope.addPost = function(){
           

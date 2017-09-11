@@ -17,7 +17,7 @@ Sort by:
 </nav>
 
 
-<div ng-repeat="post in posts | orderBy: btn:reverse | filter:searchText"">
+<div ng-repeat="post in posts | orderBy: btn:reverse | filter:searchText""> 
   <span class="glyphicon glyphicon-thumbs-up"
   ng-click="incrementUpvotes(post)"></span>
   {{post.upvotes}}
@@ -45,10 +45,7 @@ Sort by:
         <span ng-hide="{{comment.username.length}}">
           Anonimous
         </span>
-        <span style="font-size:20px; margin-left:10px;">
-          {{comment.body}}
-        </span>
-        <span style="margin-left:10px;">
+        <span style="font-size:16px; margin-left:10px;">
           {{comment.body}}
         </span>
         </div>  <!-- to tu maja sie wyswietlac komentarze wysuwac sie -->
