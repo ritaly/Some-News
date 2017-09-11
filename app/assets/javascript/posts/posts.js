@@ -42,7 +42,6 @@ angular.module('flapperNews')
       });
     };
     o.addComment = function(id, comment) {
-     
       return $http.post('/posts/' + id + '/comments', comment).then(function onSuccess(response){
         return response.data;
       }, function onError(response) {
