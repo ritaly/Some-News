@@ -62,7 +62,6 @@ angular.module('flapperNews')
       return $http.delete('/posts/' + post.id + '/comments/'+ comment.id)
       .then(function onSuccess(response){
           comment.destroy;
-          debugger
       }, function onError(response) {
         window.alert('Error: ' + response.status + " - " + response.statusText);
       });
