@@ -20,6 +20,12 @@ class CommentsController < ApplicationController
     comment.increment!(:upvotes)
     render json: comment
   end
+  def downvote
+    post = Post.find(params[:post_id])
+    comment = post.comments.find(params[:id])
+    comment.decrement!(:upvotes)
+    render json: comment
+  end
 
   def destroy
     post = Post.find(params[:post_id])

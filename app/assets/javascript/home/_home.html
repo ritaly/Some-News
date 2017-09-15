@@ -16,9 +16,11 @@
   </div>
 </nav>
 <div ng-repeat="post in posts | orderBy: btn:reverse | filter:searchText"">
-  <span class="glyphicon glyphicon-thumbs-up"
+  <span class="glyphicon glyphicon-thumbs-up bg-success"
   ng-click="incrementUpvotes(post)"></span>
-  {{post.upvotes}}
+  <span class="badge">{{post.upvotes}}</span>
+  <span class="glyphicon glyphicon-thumbs-down bg-danger"
+  ng-click="decrementUpvotes(post)"></span>
   <span style="font-size:20px; margin-left:10px;">
     <a ng-show="post.link" href="{{post.link}}">
       {{post.title}}
@@ -31,7 +33,7 @@
   <div>
 
     <button class="btn btn-sm btn-default" ng-click="showComments = !showComments" ng-show="{{post.comments.length}}">
-    See comments here
+    See comments here <span class="label label-default">{{post.comments.length}}</span>
     </button>
         <a class="btn btn-sm btn-info" href="#/posts/{{post.id}}">Read more<span class="glyphicon glyphicon-chevron-right"</span></a>
     <div class="panel panel-default" ng-show="showComments">

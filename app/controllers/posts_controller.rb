@@ -28,6 +28,11 @@ class PostsController < ApplicationController
     post.increment!(:upvotes)
     render json: post
   end
+  def downvote
+    post = Post.find(params[:id])
+    post.decrement!(:upvotes)
+    render json: post
+  end
 
   def default_serializer_options
     { root: false }

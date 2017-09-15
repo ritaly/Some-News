@@ -23,6 +23,9 @@
           $scope.incrementUpvotes = function(comment) {
             posts.upvoteComment(post, comment);
           };
+          $scope.decrementUpvotes = function(comment) {
+            posts.downvoteComment(post, comment);
+          };
 
           $scope.deleteComment = function(comment){  
             var confirmDeleteComment = $window.confirm('Are you absolutely sure you want to delete this element?');

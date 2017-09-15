@@ -21,15 +21,19 @@ angular.module('flapperNews')
     o.upvote = function(post) {
       return $http.put('/posts/' + post.id + '/upvote')
         .then(function onSuccess(response){
-          /*
-          for (i = 0; i < o.posts.length; i++) {
-              if (o.posts[i].id === response.data.id) {
-                o.posts[i].upvotes+=1;
-            }
-          }*/
            i = o.posts.findIndex(i => i.id === response.data.id); //ES2015  
             o.posts[i].upvotes +=1;
       
+          angular.copy(response.data, o.posts.filter(x => x.id === response.data.id))
+        }, function onError(response) {
+        window.alert('Error: ' + response.status + " - " +response.statusText);
+      });
+    };
+    o.downvote = function(post) {
+      return $http.put('/posts/' + post.id + '/downvote')
+        .then(function onSuccess(response){
+           i = o.posts.findIndex(i => i.id === response.data.id); //ES2015  
+            o.posts[i].upvotes -=1;
           angular.copy(response.data, o.posts.filter(x => x.id === response.data.id))
         }, function onError(response) {
         window.alert('Error: ' + response.status + " - " +response.statusText);
@@ -55,6 +59,15 @@ angular.module('flapperNews')
       return $http.put('/posts/' + post.id + '/comments/'+ comment.id + '/upvote')
       .then(function onSuccess(response){
           comment.upvotes += 1;
+      }, function onError(response) {
+        window.alert('Error: ' + response.status + " - " + response.statusText);
+      });
+    };
+    o.downvoteComment = function(post, comment) {
+      //debuger
+      return $http.put('/posts/' + post.id + '/comments/'+ comment.id + '/downvote')
+      .then(function onSuccess(response){
+          comment.upvotes -= 1;
       }, function onError(response) {
         window.alert('Error: ' + response.status + " - " + response.statusText);
       });
