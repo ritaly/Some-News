@@ -5,10 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'angular-rails-templates'
-
-gem 'angular_rails_csrf'
-
 gem 'active_model_serializers', '0.9.3'
 
 gem 'awesome_print'
@@ -31,6 +27,23 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'bundler', '>= 1.8.4'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'jquery-rails'
+
+gem 'angular-rails-templates'
+
+gem 'angular_rails_csrf'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery'
+  gem 'rails-assets-angular'
+  gem 'rails-assets-angular-devise'
+
+ # gem 'rails-assets-angular-ui-router'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
