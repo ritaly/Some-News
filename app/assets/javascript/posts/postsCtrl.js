@@ -7,14 +7,16 @@
             $scope.post = post;
 
             $scope.addComment = function(){
+              
             if($scope.body === '' || $scope.body == null) { return; }
             posts.addComment(post.id, {
               body: $scope.body,
-              upvotes: 0,
-              username: 'user'
+              upvotes: 0
+            //  username: 'user'
             }).then(function onSuccess(comment){
+              
               //$scope.post.comments = comment.post.comments;
-              $scope.post.comments.push(comment) //lastone
+              $scope.post.comments.push(comment.comment) //lastone po dodaniu serializera z comment zorbilo sie comment.comment
 
             });
           };

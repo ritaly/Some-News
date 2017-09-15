@@ -2,6 +2,7 @@
     .controller('MainCtrl', [
     '$scope','posts',
     function($scope, posts){
+        //debugger
         $scope.posts = posts.posts;
 
         $scope.currentBtn = '';
@@ -18,11 +19,13 @@
           //search tylko dla tytulow
 
         $scope.addPost = function(){
+          debugger
           
             posts.create({
               id: $scope.posts.length,
               title: $scope.title,
               link: $scope.link,
+              text: $scope.text,
               upvotes: 0,
               comments: []
             });

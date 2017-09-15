@@ -1,8 +1,11 @@
 class CommentsController < ApplicationController
-
+  before_action :authenticate_user!, only: [:create, :upvote]
   def create
     post = Post.find(params[:post_id])
-    comment = post.comments.create(params[:comment].permit!)
+    #params ={body: "Hi, hurra up!", upvotes: 2, created_at: Time.zone.now.beginning_of_day}
+    # post.comments.create(params.merge(user_id: current_user.id))
+    comment = post.comments.create(params[:comment].merge(user_id: current_user.id).permit!)
+
     #params.required - strong parametes!
     if comment.valid?
       render json: comment

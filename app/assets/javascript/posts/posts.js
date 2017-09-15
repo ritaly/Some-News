@@ -12,6 +12,7 @@ angular.module('flapperNews')
     };
     o.create = function(post) {
       return $http.post('/posts', post).then(function onSuccess(response) {
+        
         o.posts.push(response.data);
       }, function onError(response) {
         window.alert('Error: ' + response.status + " - " +response.statusText);
@@ -42,6 +43,7 @@ angular.module('flapperNews')
       });
     };
     o.addComment = function(id, comment) {
+
       return $http.post('/posts/' + id + '/comments', comment).then(function onSuccess(response){
         return response.data;
       }, function onError(response) {
