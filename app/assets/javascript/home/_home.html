@@ -31,11 +31,11 @@
   </span>
   <span>posted by <strong>{{post.user.username}}</strong></span>
   <div>
-
     <button class="btn btn-sm btn-default" ng-click="showComments = !showComments" ng-show="{{post.comments.length}}">
-    See comments here <span class="label label-default">{{post.comments.length}}</span>
-    </button>
-        <a class="btn btn-sm btn-info" href="#/posts/{{post.id}}">Read more<span class="glyphicon glyphicon-chevron-right"</span></a>
+    See comments here <span class="label label-default">{{post.comments.length}}</span></button>
+    <button class="btn btn-sm btn-danger" ng-click="deletePost(post)">
+    Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+    <a class="btn btn-sm btn-info" href="#/posts/{{post.id}}">Read more<span class="glyphicon glyphicon-chevron-right"</span></a>
     <div class="panel panel-default" ng-show="showComments">
       <div ng-repeat="comment in post.comments | orderBy:'-upvotes'" style="margin-left:1em;">
         <span class="glyphicon glyphicon-thumbs-up"
@@ -55,13 +55,13 @@
     </div>
     <hr>
   </div>
-  <form ng-submit="addPost()" style="margin-top:30px;">
+  <form ng-submit="addPost()" name="addNewPost" style="margin-top:30px;">
     <h3>Add a new post</h3>
     <div class="form-group">
       <input type="text"
       class="form-control"
       placeholder="Title"
-      ng-model="title"></input>
+      ng-model="title" required></input>
     </div>
     <div class="form-group">
       <input type="text"
@@ -74,7 +74,7 @@
       rows="5"
       class="form-control"
       placeholder="Text"
-      ng-model="text"></textarea>
+      ng-model="text" required></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Post</button>
   </form>

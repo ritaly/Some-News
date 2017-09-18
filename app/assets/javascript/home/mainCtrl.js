@@ -1,7 +1,7 @@
  angular.module('flapperNews')
     .controller('MainCtrl', [
-    '$scope','posts',
-    function($scope, posts){
+    '$scope','$window','posts',
+    function($scope, $window, posts){
         //debugger
         $scope.posts = posts.posts;
 
@@ -30,6 +30,11 @@
               comments: []
             });
             
+        };
+        $scope.deletePost = function(post){
+          debugger
+           var confirmDeletePost = $window.confirm('Are you absolutely sure you want to delete this element?');
+           posts.delete(post);
         };
         $scope.incrementUpvotes = function(post) {
           posts.upvote(post);

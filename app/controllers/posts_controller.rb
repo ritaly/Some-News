@@ -19,7 +19,12 @@ class PostsController < ApplicationController
 
   def show
     post = Post.find(params[:id])
-    #comment = post.comments
+    render json: post
+  end
+
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
     render json: post
   end
 
@@ -28,6 +33,7 @@ class PostsController < ApplicationController
     post.increment!(:upvotes)
     render json: post
   end
+
   def downvote
     post = Post.find(params[:id])
     post.decrement!(:upvotes)

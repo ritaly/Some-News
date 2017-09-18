@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+.ng-touched.ng-invalid-required {
+	outline: none;
+    border-color: #ff3e3e;
+    box-shadow: 0 0 10px #ff3e3e;
+}
