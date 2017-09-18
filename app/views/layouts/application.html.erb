@@ -10,10 +10,17 @@
     <style> .glyphicon-thumbs-up { cursor:pointer } </style>
   </head>
   <body ng-app="flapperNews">
-    <div class="row">
+    <div class="container">
+      <% flash.each do |key, value| %>
+      <div class="alert alert-info"><%= value %></div>
+      <% end %>
       <div class="col-md-6 col-md-offset-3">
+      <div class="row">
+      <div ng-include="'nav/_nav.html'"></div>
+      </div>
         <ui-view></ui-view>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>

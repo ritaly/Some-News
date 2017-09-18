@@ -1,0 +1,43 @@
+[
+  { 
+  	"id": 0,
+    "title": "post 1",
+    "upvotes": 5,
+    "comments": []
+  },
+  {
+  	"id": 1,
+    "title": "post 2",
+    "upvotes": 2,
+    "comments": []
+  },
+  {
+  	"id": 2,
+    "title": "post 3",
+    "upvotes": 15,
+    "comments": [
+      {
+        "author": "Jon",
+        "body": "Winter is comming!",
+        "upvotes": 3
+      },
+      {
+        "author": "Snow white",
+        "body": "Hello bird",
+        "upvotes": 2
+      }
+    ]
+  },
+  {
+  	"id": 3,
+    "title": "post 4",
+    "upvotes": 9,
+    "comments": []
+  },
+  {
+  	"id": 4,
+    "title": "post 5",
+    "upvotes": 4,
+    "comments": []
+  }
+]

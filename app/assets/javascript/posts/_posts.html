@@ -7,14 +7,26 @@
 		{{post.title}}
 	</span>
 	</h3>
+	<p> {{post.text}} </p>
 </div>
 <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
 	<span class="glyphicon glyphicon-thumbs-up"
 	ng-click="incrementUpvotes(comment)"></span>
-	{{comment.upvotes}} - by {{comment.author}}
+	{{comment.upvotes}} 
+	<span class="glyphicon glyphicon-thumbs-down"
+	ng-click="decrementUpvotes(comment)"></span>
+	- by
+	<span ng-show="{{comment.user.username.length}}">
+		 {{comment.user.username}}
+	</span>
+	<span ng-hide="{{comment.user.username.length}}">
+		Anonimous
+	</span>
 	<span style="font-size:20px; margin-left:10px;">
 		{{comment.body}}
 	</span>
+	<button class="btn btn-xs btn-danger" type="button"  ng-click="deleteComment(comment)"> Delete
+    </button>
 </div>
 <form ng-submit="addComment()"
 	style="margin-top:30px;">
@@ -23,7 +35,7 @@
 		<input type="text"
 		class="form-control"
 		placeholder="Comment"
-		ng-model="body"></input>
+		ng-model="body" required></input>
 	</div>
 	<button type="submit" class="btn btn-primary">Post</button>
 </form>

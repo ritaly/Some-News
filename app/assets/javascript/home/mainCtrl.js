@@ -1,24 +1,45 @@
  angular.module('flapperNews')
     .controller('MainCtrl', [
-    '$scope','posts',
-    function($scope, posts){
+    '$scope','$window','posts',
+    function($scope, $window, posts){
+        //debugger
         $scope.posts = posts.posts;
+
+        $scope.currentBtn = '';
+        $scope.sortBy = function (btn) {
+          if ($scope.currentBtn == btn) {
+            $scope.currentBtn = '-'+ btn;
+          } else {
+            $scope.currentBtn = btn;
+          }
+          //alert($scope.currentBtn);
+          return $scope.currentBtn;
+           };
+          //dopisac sortowanie
+          //search tylko dla tytulow
+
         $scope.addPost = function(){
-          if(!$scope.title || $scope.title === '') { return; }
-          $scope.posts.push({
-            id: $scope.posts.length,
-            title: $scope.title,
-            link: $scope.link,
-            upvotes: 0,
-            comments: [
-              {author: 'Joe', body: 'Cool post!', upvotes: 0},
-              {author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}
-            ]
-          });
-          $scope.title = '';
-          $scope.link = '';
+          debugger
+          
+            posts.create({
+              id: $scope.posts.length,
+              title: $scope.title,
+              link: $scope.link,
+              text: $scope.text,
+              upvotes: 0,
+              comments: []
+            });
+            
+        };
+        $scope.deletePost = function(post){
+          debugger
+           var confirmDeletePost = $window.confirm('Are you absolutely sure you want to delete this element?');
+           posts.delete(post);
         };
         $scope.incrementUpvotes = function(post) {
-          post.upvotes += 1;
+          posts.upvote(post);
+        };
+        $scope.decrementUpvotes = function(post) {
+          posts.downvote(post);
         };
     }]);
