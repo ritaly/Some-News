@@ -1,0 +1,2 @@
+class Ugabuga < ApplicationRecord
+end

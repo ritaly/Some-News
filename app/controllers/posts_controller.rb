@@ -1,14 +1,12 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!, only: [:create, :upvote]
+  before_action :authenticate_user!, only: [:create, :upvote,:destroy]
 
   def index
-    @posts = Post.all
-    render json: @posts
+    render json: Post.all
   end
 
   def create
-    # zwracanie bledu jezeli post nie jest poprawny
     post = Post.create(post_params.merge(user_id: current_user.id))
     if post.valid?
       render json: post
@@ -18,25 +16,31 @@ class PostsController < ApplicationController
   end
 
   def show
-    post = Post.find(params[:id])
-    render json: post
+    find_post and return
+    render json: @post
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    render json: post
+    find_post and return
+    @post.destroy
+    render json: @post
   end
 
   def upvote
-    post = Post.find(params[:id])
-    post.increment!(:upvotes)
-    render json: post
+    find_post and return
+    vote = @post.votes.create(user_id: current_user.id)
+    if vote.valid?
+      render json: @post
+    else
+      render json: { errors: vote.errors }
+    end
+    # TODO: usunac kolumne upvotes, gdyz upvotes = @post.votes.count
   end
 
   def downvote
-    post = Post.find(params[:id])
-    post.decrement!(:upvotes)
+    # TODO: zmodyfikować analogicznie do powyższych (find_post, wyrzucić decrement = @post.votes.destroy(...))
+ #   post = Post.find(params[:id])
+ #   post.decrement!(:upvotes)
     render json: post
   end
 
@@ -48,6 +52,14 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:link, :title, :id, :text, :upvotes)
+  end
+
+  def find_post
+    @post = Post.find_by_id(params[:id])
+    unless @post
+      render(json: { message: 'record not found' }, status: :not_found)
+      return true
+    end
   end
 end
 

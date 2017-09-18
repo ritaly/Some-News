@@ -1,25 +1,29 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :upvote, :destroy]
+  # TODO: make upvoting work as in posts
+
   def create
+    # TODO:  what if post is not found? prevent from having a 500
     post = Post.find(params[:post_id])
-    #params ={body: "Hi, hurra up!", upvotes: 2, created_at: Time.zone.now.beginning_of_day}
-    # post.comments.create(params.merge(user_id: current_user.id))
+    # TODO: use strong parameters when creating comment
+    # TODO: remove username colum from comments
     comment = post.comments.create(params[:comment].merge(user_id: current_user.id).permit!)
     #params.required - strong parametes!
     if comment.valid?
       render json: comment
     else
-      render json: post.errors.full_messages
+      render json: comment.errors.full_messages
     end
   end
 
   def upvote
-    post = Post.find(params[:post_id])
-    comment = post.comments.find(params[:id])
+    # TODO:  what if comment is not found? prevent from having a 500
+    comment = Comments.find(params[:id])
     comment.increment!(:upvotes)
     render json: comment
   end
   def downvote
+       # TODO:  what if comment is not found? prevent from having a 500
     post = Post.find(params[:post_id])
     comment = post.comments.find(params[:id])
     comment.decrement!(:upvotes)
@@ -27,6 +31,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+       # TODO:  what if comment is not found? prevent from having a 500
+
     post = Post.find(params[:post_id])
     comment = post.comments.find(params[:id])
     comment.destroy
