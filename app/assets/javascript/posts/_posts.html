@@ -16,10 +16,10 @@
 	<span class="glyphicon glyphicon-thumbs-down"
 	ng-click="decrementUpvotes(comment)"></span>
 	- by
-	<span ng-show="{{comment.user.username.length}}">
-		 {{comment.user.username}}
+	<span ng-show="{{comment.username.length}}">
+		 {{comment.username}}
 	</span>
-	<span ng-hide="{{comment.user.username.length}}">
+	<span ng-hide="{{comment.username.length}}">
 		Anonimous
 	</span>
 	<span style="font-size:20px; margin-left:10px;">

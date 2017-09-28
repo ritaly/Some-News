@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!, only: [:create, :upvote,:destroy]
+  before_action :authenticate_user!, only: %i[create upvote downvote destroy]
 
   def index
     render json: Post.all
@@ -16,32 +16,39 @@ class PostsController < ApplicationController
   end
 
   def show
-    find_post and return
+    find_post && return
     render json: @post
   end
 
   def destroy
-    find_post and return
+    find_post && return
     @post.destroy
     render json: @post
   end
 
   def upvote
-    find_post and return
+    find_post && return
     vote = @post.votes.create(user_id: current_user.id)
     if vote.valid?
       render json: @post
     else
       render json: { errors: vote.errors }
     end
-    # TODO: usunac kolumne upvotes, gdyz upvotes = @post.votes.count
+    # TODO: usunac kolumne upvotes, gdyz upvotes = @post.votes.count, po usunięciu przejrzeć wysztskie wystapienia upvotes izdecydowac czy je wyruzcic czy zmienic
   end
 
   def downvote
-    # TODO: zmodyfikować analogicznie do powyższych (find_post, wyrzucić decrement = @post.votes.destroy(...))
- #   post = Post.find(params[:id])
- #   post.decrement!(:upvotes)
-    render json: post
+# TODO: zmodyfikować analogicznie do powyższych (find_post, wyrzucić decrement = @post.votes.destroy(...))
+# post = Post.find(params[:id])
+# post.decrement!(:upvotes)
+
+    find_post && return
+    vote = @post.votes.find_by(user_id: current_user.id).destroy
+    if vote.valid?
+      render json: @post
+    else
+      render json: { errors: vote.errors }
+    end
   end
 
   def default_serializer_options

@@ -1,2 +1,0 @@
-class Ugabuga < ApplicationRecord
-end

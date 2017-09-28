@@ -7,6 +7,6 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def upvotes
-  	object.votes.count
+    object.votes.count
   end
 end

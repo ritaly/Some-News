@@ -35,7 +35,7 @@ angular.module('flapperNews')
         .then(function onSuccess(response){
            i = o.posts.findIndex(i => i.id === response.data.id); //ES2015  
             o.posts[i].upvotes +=1;
-      
+      //dajtudebugger bo cos nie dziala
           angular.copy(response.data, o.posts.filter(x => x.id === response.data.id))
         }, function onError(response) {
         window.alert('Error: ' + response.status + " - " +response.statusText);
@@ -69,7 +69,7 @@ angular.module('flapperNews')
     o.upvoteComment = function(post, comment) {
       return $http.put('/posts/' + post.id + '/comments/'+ comment.id + '/upvote')
       .then(function onSuccess(response){
-          comment.upvotes += 1;
+          comment.upvotes = response.data.comment.upvotes
       }, function onError(response) {
         window.alert('Error: ' + response.status + " - " + response.statusText);
       });
@@ -78,7 +78,7 @@ angular.module('flapperNews')
       //debuger
       return $http.put('/posts/' + post.id + '/comments/'+ comment.id + '/downvote')
       .then(function onSuccess(response){
-          comment.upvotes -= 1;
+          comment.upvotes = response.data.comment.upvotes
       }, function onError(response) {
         window.alert('Error: ' + response.status + " - " + response.statusText);
       });
