@@ -1,10 +1,8 @@
 class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
-  belongs_to :user
-  validates :title, :text, presence: true
+  has_many :votes, dependent: :destroy
+  has_many :upvoting_users, through: :votes, source: :user
 
-  #def as_json(options = {})
-    #super(options.merge(include: :comments).merge(include: :user))
-    #czy to znaczy ze jak mam serializer to as_json jest mi nie potrzebna?
-  #end
+  belongs_to :user #, optional: true
+  validates :title, :text, presence: true
  end
